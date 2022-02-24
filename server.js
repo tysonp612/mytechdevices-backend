@@ -28,7 +28,10 @@ app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors());
 
 //routes MIDDLEWARE
-app.use("/api", authRoutes);
+// app.use("/api", authRoutes);
+
+//this line below is for calling app.use for all the routes as the app starts, so we don;t have to call each route manually
+fs.readdirSync("./routes").map((r) => app.use(require(`./routes/${r}/${r}`)));
 
 //3 APP LISTENS TO PORT
 //port
